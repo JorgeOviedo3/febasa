@@ -1,0 +1,110 @@
+---
+import Image from "astro/components/Image.astro";
+import aboutImg from "../assets/about.webp";
+---
+
+<script>
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const services = gsap.utils.toArray(".service");
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+
+    const observerCallback = (entries: any, observer: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          const service = entry.target;
+          const imgContainer = service.querySelector(".img");
+
+          ScrollTrigger.create({
+            trigger: service,
+            start: "bottom bottom",
+            end: "top-=200px top",
+            scrub: true,
+            onUpdate: (self) => {
+              let progress = self.progress;
+              let newWidth = 30 + 70 * progress;
+              gsap.to(imgContainer, { width: newWidth + "%", duration: 0.1, ease: "none" });
+            },
+          });
+
+          ScrollTrigger.create({
+            trigger: service,
+            start: "top bottom",
+            end: "top-=200px top",
+            scrub: true,
+            onUpdate: (self) => {
+              let progress = self.progress;
+              let newHeight = 150 + 300 * progress;
+              gsap.to(service, { height: newHeight + "px", duration: 0.1, ease: "none" });
+            },
+          });
+
+          observer.unobserve(service);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    services.forEach((service: any) => {
+      observer.observe(service);
+    });
+  });
+</script>
+
+<section id="services">
+  <div id="postHero">
+    <h1>Nuestros Servicios</h1>
+  </div>
+  <div class="service">
+    <div class="service-info">
+      <h1>Material de construcción</h1>
+      <p>Materiales como madera, hierro, vidrio</p>
+    </div>
+    <div class="service-img">
+      <div class="img">
+        <Image src={aboutImg} width={1920} height={1080} alt={"about"} />
+      </div>
+    </div>
+  </div>
+  <div class="service">
+    <div class="service-info">
+      <h1>Herramientas</h1>
+      <p>Herramientas para la construcción</p>
+    </div>
+    <div class="service-img">
+      <div class="img">
+        <Image src={aboutImg} width={1920} height={1080} alt={"about"} />
+      </div>
+    </div>
+  </div>
+  <div class="service">
+    <div class="service-info">
+      <h1>Jardinería</h1>
+      <p>Bombas de agua, arboles</p>
+    </div>
+    <div class="service-img">
+      <div class="img">
+        <Image src={aboutImg} width={1920} height={1080} alt={"about"} />
+      </div>
+    </div>
+  </div>
+  <div class="service">
+    <div class="service-info">
+      <h1>Plomería</h1>
+      <p>Desde tubos pvc hasta bombas de agua.</p>
+    </div>
+    <div class="service-img">
+      <div class="img">
+        <Image src={aboutImg} width={1920} height={1080} alt={"about"} />
+      </div>
+    </div>
+  </div>
+</section>

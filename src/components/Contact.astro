@@ -1,0 +1,29 @@
+<script>
+  import { gsap } from "gsap";
+  document.addEventListener("DOMContentLoaded", () => {
+    const contact = document.querySelector("#contact");
+    gsap.fromTo(
+      contact,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          markers: true,
+          trigger: contact,
+          start: "top bottom",
+          end: "bottom top",
+          toggleActions: "play none none none",
+          immediateRender: false,
+        },
+      }
+    );
+  });
+</script>
+<section id="contact">
+  <h1>Contactanos</h1>
+</section>
