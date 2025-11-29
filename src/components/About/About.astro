@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import aboutImg from "../../assets/footer.png";
+import "./About.scss";
+
+const tags = [
+  "MATERIALES DE CONSTRUCCIÓN",
+  "HERRAMIENTAS",
+  "PLOMERÍA",
+  "ELECTRICIDAD",
+  "PINTURA",
+  "FERRETERÍA",
+  "JARDINERÍA",
+  "HOGAR",
+  "Y MUCHO MÁS...",
+];
+---
+
+<section id="about">
+  <div class="about-content">
+    <div class="about-left">
+      <div class="about-image">
+        <Image src={aboutImg} alt="Asesor de ferretería" />
+      </div>
+    </div>
+    <div class="about-right">
+      <h2>Todo lo que necesitas para tu proyecto, en un solo lugar.</h2>
+      <div class="about-description">
+        <p>
+          Con más de 20 años de experiencia en el sector, ofrecemos productos de la más alta calidad
+          para construcción, remodelación y mantenimiento. Asesoramiento personalizado para cada
+          proyecto, grande o pequeño.
+        </p>
+        <p>
+          Contamos con un equipo de expertos listos para ayudarte a encontrar exactamente lo que
+          buscas, también contamos con servicio de entrega a domicilio para tu comodidad.
+        </p>
+      </div>
+      <div class="about-tags">
+        {tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+      <a href="#contact" class="btn-primary">SOLICITAR ASESORÍA</a>
+    </div>
+  </div>
+</section>

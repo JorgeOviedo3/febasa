@@ -1,0 +1,10 @@
+#map {
+  padding: 8em 2em;
+  background-color: var(--main-bg-color);
+
+  #map-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+  }
+}

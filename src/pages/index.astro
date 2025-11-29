@@ -1,18 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import { Image } from "astro:assets";
+import Hero from "../components/Hero/Hero.astro";
+import Brands from "../components/Brands/Brands.astro";
+import Contact from "../components/Contact/Contact.astro";
+import Services from "../components/Services/Services.astro";
+import Map from "../components/Map/Map.astro";
+import About from "../components/About/About.astro";
+import Faq from "../components/Faq/Faq.astro";
+import Footer from "../components/Footer/Footer.astro";
 
-import fullLogo from "../assets/fullLogo.webp";
-
-import heroVideo from "../assets/Herovideo.mp4";
-
-import "../styles/styles.scss";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import Services from "../components/Services.astro";
-import Map from "../components/Map.astro";
-import About from "../components/About.astro";
+import "../styles/globals.scss";
 ---
 
 <script>
@@ -26,25 +24,13 @@ import About from "../components/About.astro";
     ScrollTrigger.clearScrollMemory("manual");
     window.scrollTo(0, 0);
 
-    // smooth scroll lenis instance
+    // LENIS INSTANCE
     const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    const navContactLink = document.querySelector("#nav-contact-link")!;
-    const hoverNavContactLink = gsap.to(navContactLink, {
-      duration: 0.3,
-      backgroundColor: "var(--secondary-color)",
-      borderColor: "var(--secondary-color)",
-      color: "white",
-      paused: true,
-      ease: "power1.inOut",
-    });
-    navContactLink.addEventListener("mouseenter", () => hoverNavContactLink.play());
-    navContactLink.addEventListener("mouseleave", () => hoverNavContactLink.reverse());
-
-    // SCROLL SMOOTH WHEN CLICKING ANCHOR
+    // SCROLL SMOOTH FOR CLICKING ANCHOR
     document.querySelectorAll('a[href^="#"]').forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
@@ -60,35 +46,13 @@ import About from "../components/About.astro";
 </script>
 
 <Layout title="Ferretería Batista - Inicio">
-  <main class="container">
-    <!-- ---------- NAV -------- -->
-    <section id="nav">
-      <div class="nav-logo">
-        <Image src={fullLogo} width={220} height={60} alt={"logo"} />
-      </div>
-      <div class="nav-links">
-        <a href="">Inicio</a><a href="">Servicios</a><a href="">Nosotros</a><a href="">Contacto</a>
-      </div>
-      <div class="nav-contact">
-        <a href="#contact" id="nav-contact-link">Contactanos</a>
-      </div>
-    </section>
-    <!-- ---------- HERO -------- -->
-    <section id="hero">
-      <div class="hero-video">
-        <video autoplay loop muted playsinline class="hero-video" src={heroVideo}></video>
-      </div>
-      <div class="hero-info"></div>
-    </section>
-    <!-- ---------- Services -------- -->
+  <main>
+    <Hero />
+    <Brands />
     <Services />
-    <!-- ---------- FAQ -------- -->
-    <section id="faq">
-      <h1>Preguntas frecuentes</h1>
-      <div class="faq-question">¿Primera Pregunta?</div>
-    </section>
-    <!-- ---------- EQUIPO Y MISION -------- -->
     <About />
+    <About />
+    <Faq />
     <Map />
     <Contact />
     <Footer />

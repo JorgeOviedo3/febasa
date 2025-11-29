@@ -1,0 +1,91 @@
+---
+import "./Services.scss";
+
+import Image from "astro/components/Image.astro";
+
+import aboutimage from "../../assets/about.webp";
+
+const services = [
+  { title: "Materiales de construcción", image: aboutimage },
+  { title: "Herramientas", image: aboutimage },
+  { title: "Plomería", image: aboutimage },
+  { title: "Electricidad", image: aboutimage },
+];
+---
+
+<section id="services">
+  <div class="services-content">
+    <div class="services-left">
+      <h2>Amplia variedad de productos para cada necesidad.</h2>
+      <a href="#contact" class="btn-primary">OBTENER UNA COTIZACIÓN</a>
+    </div>
+    <div class="services-right">
+      <div class="services-grid swiper">
+        <div class="swiper-wrapper">
+          {
+            services.map((service) => (
+              <div class="swiper-slide">
+                <div class="service-card">
+                  <div class="service-image">
+                    <Image src={service.image} alt={service.title} />
+                  </div>
+                  <h3>{service.title}</h3>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <button class="arrow-prev" aria-label="Previous service">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+      </button>
+      <button class="arrow-next" aria-label="Next service">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    new Swiper(".services-grid", {
+      modules: [Navigation],
+      slidesPerView: "auto",
+      spaceBetween: 20,
+      loop: false,
+      navigation: {
+        nextEl: ".arrow-next",
+        prevEl: ".arrow-prev",
+        disabledClass: "swiper-button-disabled",
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: "auto",
+          spaceBetween: 20,
+        },
+      },
+    });
+  });
+</script>

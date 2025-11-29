@@ -1,0 +1,114 @@
+---
+import "./Hero.scss";
+import herovideo from "../../assets/herovideoloop.mp4";
+import logowhite from "../../assets/logowhite.webp";
+import Image from "astro/components/Image.astro";
+
+const navLinks = [
+  { name: "Inicio", href: "#hero" },
+  { name: "Marcas", href: "#brands" },
+  { name: "Servicios", href: "#services" },
+  { name: "Nosotros", href: "#about" },
+  { name: "Preguntas", href: "#faq" },
+  { name: "Contacto", href: "#contact" },
+];
+---
+
+<section id="hero">
+  <div class="hero-header">
+    <div class="image-wrapper">
+      <Image src={logowhite} alt="Febasa Logo" width="150" class="logo-image" />
+    </div>
+    <div class="links-wrapper desktop-links">
+      {navLinks.map((link) => <a href={link.href}>{link.name}</a>)}
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="links-wrapper mobile-links" id="mobileMenu">
+      {navLinks.map((link) => <a href={link.href}>{link.name}</a>)}
+    </div>
+  </div>
+  <div class="hero-content">
+    <video id="heroVideo" src={herovideo} muted autoplay loop playsinline></video>
+    <div class="hero-text">
+      <h1>Soluciones integrales para la construcción.</h1>
+      <p>Comprometidos con la excelencia y calidad en Coro, desde 1970.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">CONTÁCTANOS</a>
+        <a href="#about" class="btn-secondary">CONÓCENOS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const videoElement = document.getElementById("heroVideo");
+
+  if (videoElement) {
+    videoElement.addEventListener("loadedmetadata", () => {
+      const duration = videoElement.duration;
+      let currentTime = 0;
+      let direction = 1;
+
+      setInterval(() => {
+        currentTime += 0.015 * direction;
+        if (currentTime >= duration) {
+          direction = -1;
+          currentTime = duration - 0.015;
+        }
+        if (currentTime <= 0) {
+          direction = 1;
+          currentTime = 0.015;
+        }
+
+        videoElement.currentTime = currentTime;
+      }, 16);
+    });
+  }
+
+  // Menú Hamburguesa (solo mobile)
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  let isMenuOpen = false;
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", () => {
+      isMenuOpen = !isMenuOpen;
+      hamburger.classList.toggle("active");
+      mobileMenu.classList.toggle("menu-open");
+
+      if (isMenuOpen) {
+        mobileMenu.style.display = "flex";
+        // Forzar reflow para que la animación funcione
+        mobileMenu.offsetHeight;
+        mobileMenu.classList.add("show");
+      } else {
+        mobileMenu.classList.remove("show");
+        setTimeout(() => {
+          if (!isMenuOpen) {
+            mobileMenu.style.display = "none";
+          }
+        }, 300);
+      }
+    });
+
+    // Cerrar menú al hacer clic en un link
+    const menuLinks = mobileMenu.querySelectorAll("a");
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isMenuOpen) {
+          isMenuOpen = false;
+          hamburger.classList.remove("active");
+          mobileMenu.classList.remove("show");
+          mobileMenu.classList.remove("menu-open");
+          setTimeout(() => {
+            mobileMenu.style.display = "none";
+          }, 300);
+        }
+      });
+    });
+  }
+</script>

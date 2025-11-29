@@ -1,0 +1,25 @@
+---
+import "./Map.scss";
+---
+
+<script>
+  import L from "leaflet";
+
+  import "leaflet/dist/leaflet.css";
+
+  const map = L.map("map-container", {
+    center: L.latLng(11.4114312, -69.667466),
+    zoom: 20,
+  });
+
+  L.tileLayer("http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+  }).addTo(map);
+
+  L.marker([11.4113962, -69.667528]).addTo(map);
+</script>
+
+<section id="map">
+  <h1>Donde encontrarnos</h1>
+  <div id="map-container"></div>
+</section>

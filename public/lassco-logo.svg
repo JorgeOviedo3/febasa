@@ -1,0 +1,7 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange square -->
+  <rect x="10" y="10" width="20" height="40" fill="#F55700" rx="3"/>
+  
+  <!-- Text: lassco -->
+  <text x="40" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF">lassco</text>
+</svg>

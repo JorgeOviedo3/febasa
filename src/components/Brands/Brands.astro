@@ -1,0 +1,35 @@
+---
+import "./Brands.scss";
+
+import Image from "astro/components/Image.astro";
+
+import brand1 from "../../assets/brands/brand1.webp";
+import faguax from "../../assets/brands/faguax.webp";
+import griven from "../../assets/brands/griven.webp";
+import cobra from "../../assets/brands/cobra.webp";
+import gater from "../../assets/brands/gater.webp";
+
+const brands = [
+  { name: "Faguax", logo: faguax },
+  { name: "Griven", logo: griven },
+  { name: "Cobra", logo: cobra },
+  { name: "Gater", logo: gater },
+];
+---
+
+<section id="brands">
+  <div class="brands-content">
+    <h2>
+      Trabajamos con las mejores marcas del <span>mercado</span>, <br /> así nos asociamos para ofrecerte
+      <span>calidad</span>.
+    </h2>
+    <div class="brands-logos-wrapper">
+      <div class="brands-logos">
+        {brands.map((brand) => <Image class="brand-logo" src={brand.logo} alt={brand.name} />)}
+        {brands.map((brand) => <Image class="brand-logo" src={brand.logo} alt={brand.name} />)}
+        {brands.map((brand) => <Image class="brand-logo" src={brand.logo} alt={brand.name} />)}
+        {brands.map((brand) => <Image class="brand-logo" src={brand.logo} alt={brand.name} />)}
+      </div>
+    </div>
+  </div>
+</section>

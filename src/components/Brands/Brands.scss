@@ -1,0 +1,132 @@
+@import "../../styles/globals.scss";
+
+#brands {
+  padding: 80px 20px;
+  background-color: $main-bg-color;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    padding: 120px 32px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 200px 32px;
+  }
+
+  .brands-content {
+    h2 {
+      font-family: "Epilogue", sans-serif;
+      font-size: clamp(1.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: $secondary-bg-color;
+      line-height: 1.4;
+      width: 100%;
+
+      br {
+        display: none;
+
+        @media (min-width: 768px) {
+          display: block;
+        }
+      }
+
+      span {
+        color: $primary-color;
+      }
+    }
+    .brands-logos-wrapper {
+      margin-top: 40px;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      height: 40px;
+
+      @media (min-width: 768px) {
+        margin-top: 70px;
+        height: 50px;
+      }
+
+      @media (min-width: 1024px) {
+        margin-top: 100px;
+        height: 60px;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 50px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+
+        @media (min-width: 768px) {
+          width: 80px;
+        }
+
+        @media (min-width: 1024px) {
+          width: 100px;
+        }
+      }
+
+      &::before {
+        left: 0;
+        background: linear-gradient(to right, $main-bg-color, transparent);
+      }
+
+      &::after {
+        right: 0;
+        background: linear-gradient(to left, $main-bg-color, transparent);
+      }
+    }
+
+    .brands-logos {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      height: 40px;
+      animation: scroll 20s linear infinite;
+      width: fit-content;
+
+      @media (min-width: 768px) {
+        gap: 40px;
+        height: 50px;
+      }
+
+      @media (min-width: 1024px) {
+        gap: 48px;
+        height: 60px;
+      }
+
+      &:hover {
+        animation-play-state: paused;
+      }
+
+      .brand-logo {
+        height: 100%;
+        width: auto;
+        opacity: 0.8;
+        filter: grayscale(100%);
+        transition:
+          opacity 0.3s ease,
+          filter 0.3s ease;
+        flex-shrink: 0;
+
+        &:hover {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
+      }
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
