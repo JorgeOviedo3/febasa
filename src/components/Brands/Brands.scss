@@ -16,11 +16,23 @@
   .brands-content {
     h2 {
       font-family: "Epilogue", sans-serif;
-      font-size: clamp(1.5rem, 5vw, 4rem);
+      font-size: 36px;
       font-weight: 400;
       color: $secondary-bg-color;
-      line-height: 1.4;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
       width: 100%;
+
+      @media (min-width: 768px) {
+        font-size: 56px;
+        line-height: 1.2;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 70px;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
 
       br {
         display: none;
@@ -108,9 +120,7 @@
         width: auto;
         opacity: 0.8;
         filter: grayscale(100%);
-        transition:
-          opacity 0.3s ease,
-          filter 0.3s ease;
+        transition: opacity 0.3s ease, filter 0.3s ease;
         flex-shrink: 0;
 
         &:hover {

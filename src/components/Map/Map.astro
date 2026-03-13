@@ -3,23 +3,41 @@ import "./Map.scss";
 ---
 
 <script>
+  import logo from "../../assets/logo.webp";
   import L from "leaflet";
 
   import "leaflet/dist/leaflet.css";
 
   const map = L.map("map-container", {
     center: L.latLng(11.4114312, -69.667466),
-    zoom: 20,
+    zoom: 16,
+    attributionControl: false,
+    scrollWheelZoom: false,
   });
 
-  L.tileLayer("http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
-    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    attribution: "",
+    subdomains: "abcd",
+    maxZoom: 20,
   }).addTo(map);
 
-  L.marker([11.4113962, -69.667528]).addTo(map);
+  // Icono personalizado con el logo
+  const customIcon = L.divIcon({
+    className: "custom-marker",
+    html: `
+      <div class="marker-pin">
+        <div class="marker-icon">
+          <img src=${logo.src} alt="Ferreteria Batista" />
+        </div>
+      </div>
+    `,
+    iconSize: [40, 50],
+    iconAnchor: [20, 50],
+  });
+
+  L.marker([11.4113962, -69.667528], { icon: customIcon }).addTo(map);
 </script>
 
-<section id="map">
-  <h1>Donde encontrarnos</h1>
+<div id="map">
   <div id="map-container"></div>
-</section>
+</div>

@@ -1,0 +1,221 @@
+@import "../../styles/globals.scss";
+
+#faq {
+  background-color: $main-bg-color;
+  padding: 80px 20px;
+  padding-top: 0px;
+
+  @media (min-width: 768px) {
+    padding: 120px 32px;
+    padding-top: 0px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 200px 32px;
+    padding-top: 0px;
+  }
+
+  .faq-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      gap: 60px;
+      align-items: flex-start;
+    }
+  }
+
+  .faq-left {
+    width: 80%;
+
+    h2 {
+      font-family: "Epilogue", sans-serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: $secondary-bg-color;
+      margin-bottom: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+
+      @media (min-width: 768px) {
+        font-size: 48px;
+        line-height: 1;
+        margin-bottom: 32px;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 60px;
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+      }
+    }
+
+    .faq-subtitle {
+      font-family: "Epilogue", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: $secondary-bg-color;
+      line-height: 1.6;
+      margin-bottom: 32px;
+
+      @media (min-width: 768px) {
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
+    }
+
+    .btn-primary {
+      font-family: "Epilogue", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      background-color: $primary-color;
+      color: $main-bg-color;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      display: inline-block;
+
+      @media (min-width: 768px) {
+        font-size: 14px;
+        padding: 16px 32px;
+      }
+
+      &:hover {
+        background-color: #ff7a2e;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .faq-right {
+    width: 100%;
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background-color: transparent;
+
+      .faq-item {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &:first-child {
+          border-top: none;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &[open] {
+          .faq-question {
+            .faq-icon svg {
+              transform: rotate(180deg);
+            }
+          }
+
+          .faq-answer {
+            animation: slideDown 0.3s ease;
+          }
+        }
+
+        .faq-question {
+          font-family: "Epilogue", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          color: $secondary-bg-color;
+          padding: 24px 0;
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 20px;
+          transition: all 0.2s ease;
+          user-select: none;
+
+          @media (min-width: 768px) {
+            font-size: 18px;
+            padding: 28px 0;
+          }
+
+          @media (min-width: 1024px) {
+            font-size: 20px;
+            padding: 32px 0;
+          }
+
+          &::-webkit-details-marker {
+            display: none;
+          }
+
+          .faq-icon {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            color: $secondary-bg-color;
+
+            svg {
+              transition: transform 0.3s ease;
+              width: 20px;
+              height: 20px;
+
+              @media (min-width: 768px) {
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+        }
+
+        .faq-answer {
+          padding: 0 0 24px 12px;
+
+          @media (min-width: 1024px) {
+            padding: 0 0 32px 16px;
+          }
+
+          p {
+            font-family: "Epilogue", sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: $secondary-bg-color;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 90%;
+
+            @media (min-width: 768px) {
+              font-size: 16px;
+              line-height: 1.7;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

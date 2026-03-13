@@ -2,5 +2,22 @@
 
 #footer {
   width: 100%;
-  background-color: $secondary-bg-color;
+  padding: 20px 20px;
+  background-color: $main-bg-color;
+  .footer-content {
+    color: $secondary-bg-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Epilogue", sans-serif;
+    a {
+      text-decoration: none;
+      color: $secondary-bg-color;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #ff7a2e;
+      }
+    }
+  }
 }

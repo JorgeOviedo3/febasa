@@ -1,8 +1,75 @@
 ---
 import "./Faq.scss";
+
+const faqs = [
+  {
+    question: "¿Qué venden?",
+    answer:
+      "Ofrecemos una amplia variedad de productos para construcción, remodelación y mantenimiento. Desde materiales de construcción, herramientas profesionales, plomería y electricidad, hasta pintura, ferretería, jardinería y artículos para el hogar. Trabajamos con las mejores marcas del mercado para garantizar calidad en cada producto.",
+  },
+  {
+    question: "¿Dónde están?",
+    answer:
+      "Estamos ubicados estratégicamente para servirte mejor. Puedes visitarnos en nuestra sucursal principal o contactarnos para coordinar entregas a domicilio. También ofrecemos asesoría remota para ayudarte a planificar tu proyecto desde la comodidad de tu hogar.",
+  },
+  {
+    question: "¿Cómo me ayudan?",
+    answer:
+      "Nuestro equipo de expertos con más de 20 años de experiencia está listo para brindarte asesoría personalizada en cada etapa de tu proyecto. Te ayudamos a seleccionar los productos adecuados, calcular cantidades necesarias, optimizar tu presupuesto y resolver cualquier duda técnica. Además, ofrecemos servicio de entrega a domicilio para tu comodidad.",
+  },
+  {
+    question: "¿Hacen entregas a domicilio?",
+    answer:
+      "Sí, contamos con servicio de entrega a domicilio para tu comodidad. Nuestro equipo de logística se encarga de llevar tus productos de manera segura y en los tiempos acordados. Consulta con nuestros asesores sobre cobertura y tarifas de envío.",
+  },
+  {
+    question: "¿Ofrecen garantía en los productos?",
+    answer:
+      "Todos nuestros productos cuentan con garantía del fabricante. Trabajamos únicamente con marcas reconocidas que respaldan la calidad de sus productos. Nuestro equipo te brindará toda la información sobre las garantías específicas de cada artículo.",
+  },
+];
 ---
 
 <section id="faq">
-  <h1>Preguntas frecuentes</h1>
-  <div class="faq-question">¿Primera Pregunta?</div>
+  <div class="faq-content">
+    <div class="faq-left">
+      <h2>Preguntas frecuentes</h2>
+      <p class="faq-subtitle">
+        Resolvemos tus dudas más comunes sobre nuestros productos y servicios.
+      </p>
+    </div>
+    <div class="faq-right">
+      <div class="faq-list">
+        {
+          faqs.map((faq, index) => (
+            <details class="faq-item">
+              <summary class="faq-question">
+                {faq.question}
+                <span class="faq-icon">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </summary>
+              <div class="faq-answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </section>
