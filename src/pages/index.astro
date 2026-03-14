@@ -14,20 +14,16 @@ import "../styles/globals.scss";
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
   import Lenis from "lenis";
 
   document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    ScrollTrigger.clearScrollMemory("manual");
     window.scrollTo(0, 0);
 
     // LENIS INSTANCE
     const lenis = new Lenis();
-    lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+
 
     // SCROLL SMOOTH FOR CLICKING ANCHOR
     document.querySelectorAll('a[href^="#"]').forEach((el) => {
@@ -37,14 +33,151 @@ import "../styles/globals.scss";
         if (!id) return;
         const target = document.getElementById(id);
         if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
+          lenis.scrollTo(target, { offset: 0, duration: 1.4 });
         }
       });
     });
+
+    // ─── HERO: hide elements before loader exits ───────────────────────────
+    gsap.set(".hero-header", { autoAlpha: 0, y: -30 });
+    gsap.set(".hero-text h1", { autoAlpha: 0, y: 80 });
+    gsap.set(".hero-text p", { autoAlpha: 0, y: 50 });
+    gsap.set(".hero-buttons", { autoAlpha: 0, y: 30 });
+
+    // ─── PAGE LOADER EXIT ──────────────────────────────────────────────────
+    const loaderTl = gsap.timeline({ delay: 0.3 });
+
+    loaderTl
+      // fill the orange progress bar
+      .to("#loaderBarFill", {
+        width: "100%",
+        duration: 1.1,
+        ease: "power2.inOut",
+      })
+      // wipe loader off screen (upward reveal)
+      .to(
+        "#page-loader",
+        {
+          clipPath: "inset(0 0 100% 0)",
+          duration: 0.9,
+          ease: "expo.inOut",
+          onComplete: () => {
+            const loader = document.getElementById("page-loader");
+            if (loader) loader.style.display = "none";
+          },
+        },
+        "+=0.05"
+      )
+      // hero elements cascade in
+      .to(
+        ".hero-header",
+        { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" },
+        "-=0.45"
+      )
+      .to(
+        ".hero-text h1",
+        { autoAlpha: 1, y: 0, duration: 1.1, ease: "power3.out" },
+        "-=0.75"
+      )
+      .to(
+        ".hero-text p",
+        { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" },
+        "-=0.8"
+      )
+      .to(
+        ".hero-buttons",
+        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.7"
+      );
+
+    // ─── SCROLL ANIMATIONS (IntersectionObserver) ──────────────────────────
+    const reveal = (
+      selector: string,
+      from: { x?: number; y?: number; scale?: number },
+      stagger = false
+    ) => {
+      const els = Array.from(document.querySelectorAll<HTMLElement>(selector));
+      if (!els.length) return;
+
+      const transforms: string[] = [];
+      if (from.y !== undefined) transforms.push(`translateY(${from.y}px)`);
+      if (from.x !== undefined) transforms.push(`translateX(${from.x}px)`);
+      if (from.scale !== undefined) transforms.push(`scale(${from.scale})`);
+
+      els.forEach((el, i) => {
+        el.style.opacity = "0";
+        if (transforms.length) el.style.transform = transforms.join(" ");
+        el.style.transition = "opacity 0.75s ease, transform 0.75s ease";
+        if (stagger) el.style.transitionDelay = `${i * 0.13}s`;
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              el.style.opacity = "1";
+              el.style.transform = "none";
+              observer.unobserve(el);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px" }
+      );
+
+      els.forEach((el) => observer.observe(el));
+    };
+
+    // BRANDS
+    reveal("#brands h2", { y: 60 });
+    reveal("#brands .brands-logos-wrapper", { y: 20 });
+
+    // SERVICES
+    reveal("#services .services-left", { x: -70 });
+    reveal("#services .services-right", { x: 70 });
+
+    // ABOUT
+    reveal("#about .about-left", { x: -80 });
+    reveal("#about .about-right h2", { y: 50 });
+    reveal("#about .about-description p", { y: 30 }, true);
+    reveal("#about .tag", { scale: 0.7 }, true);
+    reveal("#about .about-right .btn-primary", { y: 20 });
+
+    // FAQ
+    reveal("#faq .faq-left", { x: -60 });
+    reveal("#faq .faq-item", { y: 40 }, true);
+
+    // CONTACT
+    reveal("#contact .contact-header", { y: 60 });
+    reveal("#contact .contact-card", { y: 50 });
+
+    // FOOTER
+    const footerEl = document.querySelector<HTMLElement>("#footer");
+    if (footerEl) {
+      footerEl.style.opacity = "0";
+      footerEl.style.transform = "translateY(30px)";
+      footerEl.style.transition = "opacity 0.75s ease, transform 0.75s ease";
+      const footerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              footerEl.style.opacity = "1";
+              footerEl.style.transform = "none";
+              footerObserver.unobserve(footerEl);
+            }
+          });
+        },
+        { rootMargin: "0px 0px 0% 0px" }
+      );
+      footerObserver.observe(footerEl);
+    }
   });
 </script>
 
-<Layout title="Ferretería Batista">
+<Layout
+  title="Ferretería Batista | Materiales de Construcción en Coro, Falcón"
+  description="Ferretería Batista (Febasa) — más de 50 años distribuyendo materiales de construcción, herramientas, plomería, electricidad y pintura en Coro, Falcón, Venezuela. Llámanos: +58 268 253 1044."
+>
   <main>
     <Hero />
     <Brands />

@@ -3,29 +3,29 @@ import "./Faq.scss";
 
 const faqs = [
   {
-    question: "¿Qué venden?",
+    question: "¿Qué productos vende Ferretería Batista?",
     answer:
-      "Ofrecemos una amplia variedad de productos para construcción, remodelación y mantenimiento. Desde materiales de construcción, herramientas profesionales, plomería y electricidad, hasta pintura, ferretería, jardinería y artículos para el hogar. Trabajamos con las mejores marcas del mercado para garantizar calidad en cada producto.",
+      "En Febasa encontrarás todo lo que necesitas para construcción, remodelación y mantenimiento: materiales de construcción, herramientas manuales y eléctricas, repuestos para herramientas, plomería, electricidad, luminaria, pinturas, tanques de agua, mallas, jardinería y artículos para el hogar. Trabajamos con marcas reconocidas como Faguax, Griven, Cobra y Gater.",
   },
   {
-    question: "¿Dónde están?",
+    question: "¿Dónde está ubicada la ferretería en Coro?",
     answer:
-      "Estamos ubicados estratégicamente para servirte mejor. Puedes visitarnos en nuestra sucursal principal o contactarnos para coordinar entregas a domicilio. También ofrecemos asesoría remota para ayudarte a planificar tu proyecto desde la comodidad de tu hogar.",
+      "Estamos en Av. Independencia 204, Coro, estado Falcón, Venezuela. Atendemos de lunes a viernes de 8:00am a 1:00pm y de 2:00pm a 5:00pm. También puedes llamarnos al +58 268 253 1044 o escribirnos a info@febasa.com para coordinar tu visita.",
   },
   {
-    question: "¿Cómo me ayudan?",
+    question: "¿Ofrecen asesoría para proyectos de construcción?",
     answer:
-      "Nuestro equipo de expertos con más de 20 años de experiencia está listo para brindarte asesoría personalizada en cada etapa de tu proyecto. Te ayudamos a seleccionar los productos adecuados, calcular cantidades necesarias, optimizar tu presupuesto y resolver cualquier duda técnica. Además, ofrecemos servicio de entrega a domicilio para tu comodidad.",
+      "Sí. Nuestro equipo de asesores con más de 50 años de trayectoria en el sector te orientará en cada etapa de tu proyecto. Te ayudamos a seleccionar los materiales adecuados, calcular cantidades exactas y optimizar tu presupuesto, tanto para obras residenciales como comerciales en Coro y el estado Falcón.",
   },
   {
-    question: "¿Hacen entregas a domicilio?",
+    question: "¿Hacen entregas a domicilio en Coro?",
     answer:
-      "Sí, contamos con servicio de entrega a domicilio para tu comodidad. Nuestro equipo de logística se encarga de llevar tus productos de manera segura y en los tiempos acordados. Consulta con nuestros asesores sobre cobertura y tarifas de envío.",
+      "Sí, contamos con servicio de entrega a domicilio en Coro y zonas cercanas del estado Falcón. Nuestro equipo garantiza que tus productos lleguen de forma segura y en el tiempo acordado. Consulta disponibilidad y tarifas llamando al +58 268 253 1044 o por WhatsApp.",
   },
   {
-    question: "¿Ofrecen garantía en los productos?",
+    question: "¿Los productos tienen garantía?",
     answer:
-      "Todos nuestros productos cuentan con garantía del fabricante. Trabajamos únicamente con marcas reconocidas que respaldan la calidad de sus productos. Nuestro equipo te brindará toda la información sobre las garantías específicas de cada artículo.",
+      "Todos nuestros productos incluyen la garantía del fabricante. Al trabajar exclusivamente con marcas de reconocida trayectoria como Faguax, Griven, Cobra y Gater, respaldamos la calidad de cada artículo. Nuestros asesores te informan sobre los términos específicos de garantía antes de tu compra.",
   },
 ];
 ---
@@ -33,9 +33,9 @@ const faqs = [
 <section id="faq">
   <div class="faq-content">
     <div class="faq-left">
-      <h2>Preguntas frecuentes</h2>
+      <h2>Preguntas frecuentes sobre Ferretería Batista</h2>
       <p class="faq-subtitle">
-        Resolvemos tus dudas más comunes sobre nuestros productos y servicios.
+        Todo lo que necesitas saber sobre nuestra ferretería en Coro, Falcón.
       </p>
     </div>
     <div class="faq-right">
@@ -73,3 +73,16 @@ const faqs = [
     </div>
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+})} />
